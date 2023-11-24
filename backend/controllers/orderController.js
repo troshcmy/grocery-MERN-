@@ -46,12 +46,14 @@ exports.updateOrder = async (req, res) => {
   }
 };
 
+// DELETE remove an order
 exports.deleteOrder = async (req, res) => {
   try {
-    await Order.findByIdAndRemove(req.params.id);
+    await Order.findByIdAndDelete(req.params.id);
     res.sendStatus(204);
   } catch (err) {
     console.log(err);
     res.sendStatus(500);
   }
 };
+

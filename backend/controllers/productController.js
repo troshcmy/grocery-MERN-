@@ -51,6 +51,7 @@ exports.deleteProduct = async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.sendStatus(204);
+    
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

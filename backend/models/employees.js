@@ -1,13 +1,14 @@
 // models/employees.js
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const mongoose = require('../db');
+
 
 const employeeSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  Empid: { type: Number, required: true,},
+  Username: { type: String, required: true,},
+  Password: { type: String, required: true },
 });
 
 
-const Employee = mongoose.model('Employee', employeeSchema);
+const Employees = mongoose.model('Employee', employeeSchema);
 
-module.exports = Employee;
+module.exports = Employees;

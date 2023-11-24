@@ -1,0 +1,56 @@
+<!-- // const jwt = require('jsonwebtoken');
+const Employees = require('../models/employees');
+
+// Get all employees items
+exports.getAllEmployees = async (req, res) => {
+  try {
+    const employees = await Employees.find();
+    res.json(employees);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Get an employees item by ID
+exports.getEmployeesById = async (req, res) => {
+  try {
+    const employee = await Employees.findById(req.params.id);
+    res.json(employee);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Create a new employee
+exports.createEmployees = async (req, res) => {
+  try {
+    const Employee = new Employees(req.body);
+    await Employee.save();
+    res.json(Employee);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+};
+
+
+
+// Update an employees item by ID
+exports.updateEmployees = async (req, res) => {
+  try {
+    const updatedEmployee = await Employees.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedEmployee);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+// Delete an employees item by ID
+exports.deleteEmployees = async (req, res) => {
+  try {
+    await Employees.findByIdAndRemove(req.params.id);
+    res.status(204).end();
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}; -->
