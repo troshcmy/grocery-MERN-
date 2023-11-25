@@ -46,14 +46,24 @@ exports.updateOrder = async (req, res) => {
   }
 };
 
-// DELETE remove an order
+// controllers/orderController.js
 exports.deleteOrder = async (req, res) => {
   try {
-    await Order.findByIdAndDelete(req.params.id);
-    res.sendStatus(204);
+    const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+
+    if (!deletedOrder) {
+      // If no order is found with the given ID
+      return res.status(404).json({ error: 'Order not found' });
+    }
+
+    // Success message
+    res.status(200).json({ message: 'Order deleted successfully' });
   } catch (err) {
+    // Error message
     console.log(err);
-    res.sendStatus(500);
+    res.status(500).json({ error: 'Internal server error', details: err.message });
   }
 };
+
+
 

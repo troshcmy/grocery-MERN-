@@ -47,14 +47,20 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
+// controllers/productController.js
 exports.deleteProduct = async (req, res) => {
   try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.sendStatus(204);
-    
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+
+    if (!deletedProduct) {
+      // If no product is found with the given ID
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    // Success message
+    res.status(200).json({ message: 'Product deleted successfully' });
   } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
+    // Error message
+    res.status(500).json({ error: 'Internal server error', details: err.message });
   }
 };
-// controllers/orderController.js
