@@ -33,6 +33,29 @@ exports.createOrder = async (req, res) => {
   }
 };
 
+// // NEW CODE STARTS HERE
+
+// exports.createOrder = async (req, res) => {
+//   try {
+//     const order = new Order(req.body);
+    
+//     // Set the 'lastupdated' field to the current date
+//     order.lastupdated = new Date();
+    
+//     await order.save();
+
+//     // Call triggerNotification function after saving the order
+//     await triggerNotification(order);
+
+//     res.json(order);
+//   } catch (err) {
+//     console.log(err);
+//     res.sendStatus(500);
+//   }
+// };
+
+// // NEW CODE ENDS HERE
+
 exports.updateOrder = async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, 

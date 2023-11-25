@@ -29,7 +29,7 @@ exports.createCarts = async (req, res) => {
   try {
     const newCarts = await carts.save();
     res
-      .status(201)
+      .status(200)
       .json({ message: "Carts created successfully", carts: newCarts }); // Update response message
   } catch (error) {
     res.status(400).json({ message: "Invalid data provided" });
