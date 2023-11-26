@@ -1,4 +1,6 @@
 // controllers/orderController.js
+
+// GET method
 const Order = require('../models/orders');
 
 exports.getAllOrders = async (req, res) => {
@@ -11,6 +13,9 @@ exports.getAllOrders = async (req, res) => {
   }
 };
 
+
+// GET method by ID
+
 exports.getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -21,6 +26,9 @@ exports.getOrderById = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+
+// POST method
 
 exports.createOrder = async (req, res) => {
   try {
@@ -56,6 +64,8 @@ exports.createOrder = async (req, res) => {
 
 // // NEW CODE ENDS HERE
 
+// PUT method
+
 exports.updateOrder = async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, 
@@ -69,7 +79,32 @@ exports.updateOrder = async (req, res) => {
   }
 };
 
-// controllers/orderController.js
+
+// PATCH method
+
+exports.patchOrder = async (req, res) => {
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body }, // Use $set to update only the specified fields
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.json({
+      message: "Order patched successfully",
+      order: updatedOrder,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error", details: error.message });
+  }
+};
+
+// DELETE method
 exports.deleteOrder = async (req, res) => {
   try {
     const deletedOrder = await Order.findByIdAndDelete(req.params.id);

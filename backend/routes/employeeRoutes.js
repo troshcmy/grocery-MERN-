@@ -7,6 +7,7 @@ router.get("/", authMiddleware, employeeController.getAllEmployees);
 router.get("/:id", authMiddleware, employeeController.getEmployeesById);
 router.post("/", authMiddleware, employeeController.createEmployees);
 router.put('/:id',authMiddleware, employeeController.updateEmployees);
+router.patch("/:id", authMiddleware, employeeController.updateEmployee);
 router.delete("/:id", authMiddleware, employeeController.deleteEmployees);
 
 module.exports = router;

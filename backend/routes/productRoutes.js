@@ -9,6 +9,7 @@ router.get('/',authMiddleware, productController.getAllProducts);
 router.get('/:id',authMiddleware, productController.getProductById);
 router.post('/',authMiddleware, productController.createProduct);
 router.put('/:id',authMiddleware, productController.updateProduct);
+router.patch('/:id',authMiddleware, productController.patchProduct);
 router.delete('/:id',authMiddleware, productController.deleteProduct);
 
 module.exports = router;

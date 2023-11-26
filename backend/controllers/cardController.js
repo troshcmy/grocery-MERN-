@@ -1,5 +1,7 @@
 const Carts = require("../models/card"); // Update import
 
+// GET method
+
 exports.getcarts = async (req, res) => {
   try {
     const carts = await Carts.find({}); // Update model name
@@ -8,6 +10,8 @@ exports.getcarts = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// GET method by ID
 
 exports.findByCartsId = async (req, res) => {
   try {
@@ -23,6 +27,8 @@ exports.findByCartsId = async (req, res) => {
   }
 };
 
+// POST method
+
 exports.createCarts = async (req, res) => {
   console.log("Request Body:", req.body);
   const carts = new Carts(req.body); // Update model name
@@ -35,6 +41,31 @@ exports.createCarts = async (req, res) => {
     res.status(400).json({ message: "Invalid data provided" });
   }
 };
+
+// PUTCH method
+
+exports.updateCarts = async (req, res) => {
+  try {
+    const updatedCarts = await Carts.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    if (!updatedCarts) {
+      return res.status(404).json({ message: "Carts not found" });
+    }
+
+    res.json({
+      message: "Carts updated successfully",
+      carts: updatedCarts,
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// PUT method
 
 exports.updateCarts = async (req, res) => {
   try {
@@ -53,6 +84,8 @@ exports.updateCarts = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+// DELETE method
 
 exports.deleteCarts = async (req, res) => {
   try {

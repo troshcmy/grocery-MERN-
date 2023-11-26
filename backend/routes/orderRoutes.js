@@ -10,6 +10,7 @@ router.get('/', authMiddleware, orderController.getAllOrders);
 router.get('/:id',authMiddleware, orderController.getOrderById);
 router.post('/',authMiddleware, orderController.createOrder);
 router.put('/:id',authMiddleware, orderController.updateOrder);
+router.patch('/:id',authMiddleware, orderController.patchOrder);
 router.delete('/:id',authMiddleware, orderController.deleteOrder);
 
 module.exports = router;

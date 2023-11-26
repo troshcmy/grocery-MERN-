@@ -1,6 +1,8 @@
 // controllers/productController.js
 const Product = require('../models/products');
 
+
+// GET method
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find({});
@@ -10,6 +12,8 @@ exports.getAllProducts = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+// GET method by ID
 
 exports.getProductById = async (req, res) => {
   try {
@@ -22,6 +26,8 @@ exports.getProductById = async (req, res) => {
   }
 };
 
+// POST method
+
 exports.createProduct = async (req, res) => {
   try {
     const product = new Product(req.body);
@@ -32,6 +38,8 @@ exports.createProduct = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+// PUT method
 
 exports.updateProduct = async (req, res) => {
   try {
@@ -47,7 +55,32 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-// controllers/productController.js
+// PATCH method
+
+exports.patchProduct = async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body }, // Use $set to update only the specified fields
+      { new: true }
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.json({
+      message: "Product patched successfully",
+      product: updatedProduct,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error", details: error.message });
+  }
+};
+
+// DELETE method
+
 exports.deleteProduct = async (req, res) => {
   try {
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
