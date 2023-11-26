@@ -1,9 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const cors = require("cors");
+const corsMiddleware = require("./cors"); // Import the cors middleware
 
-app.use(cors());
+app.use(corsMiddleware); // Enable CORS using the imported middleware
 app.use(bodyParser.json());
 
 const cartsRoutes = require("./routes/cartsRoutes");
